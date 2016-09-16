@@ -56,7 +56,9 @@ function _get_updates($where, $limit = 0)
 function get_updates_for_game($game_id)
 {
 	$game_id = intval ($game_id);
-	return _get_updates("kg.id = $game_id");
+	//Need to select from kg by primary key AND ku by game id.
+	//Also let's include polygon updates
+	return _get_updates("ku.game_id = 7148 AND kg.id = $game_id AND kp.polygon_id = kg.polygon");
 }
 
 function get_updates_for_ip($ip)
